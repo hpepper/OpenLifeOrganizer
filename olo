@@ -1,0 +1,3 @@
+#!/bin/sh
+
+./OpenLifeOrganizer  --docroot . --http-address localhost --http-port 9090
