@@ -32,7 +32,7 @@
 View::View(const Wt::WEnvironment& env)
     : Wt::WApplication(env)
 {
-  setTitle("WtTest");
+  setTitle("OpenLifeOrganizer");
   //useStyleSheet("everywidget.css");
   //useStyleSheet("example1.css");
 

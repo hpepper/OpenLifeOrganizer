@@ -1,7 +1,10 @@
-Add tabs
-Add Status bar
-Poupulate Capture tab
 Create/Read storage file(XML file).
 Push to storage file
+Create Capture Tab, for capturing all the ideas 
+  Have an 'Add' button that just adds the line
+  Have a 'Detailed' button that takes you to the 'Detailing' tab wich enables you to add more details to the entry.
+Add creation time stamp to 
 Populate Chunk tab.
+  Probably start with 'Tag' s for chunking.
+  When typing in 'Tag' provide suggestions.
 
