@@ -9,9 +9,19 @@
 
 #include "MdlOloDb.h"
 
+/**
+ * @param sXmlFilename - Name of the Character sheet.
+ * @param sDataPath - Path to the data files, like the weapons etc, can be relative.
+ *
+ *
+ */
 MdlOloDb::MdlOloDb(std::string sXmlFilename) {
-	// TODO Auto-generated constructor stub
+	m_sFilename = sXmlFilename;
 
+	int nStatus = m_xmlDoc.LoadFile(sXmlFilename.c_str());
+	if (nStatus == 0) {
+		m_xmlRoot = m_xmlDoc.RootElement();
+	}
 }
 
 MdlOloDb::~MdlOloDb() {

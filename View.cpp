@@ -29,7 +29,7 @@
   IT uses the gridlayout, because it can actually stretch the gui to fill the
     screen/browser window.
  */
-View::View(const Wt::WEnvironment& env)
+View::View(const Wt::WEnvironment& env, Controller *pController)
     : Wt::WApplication(env)
 {
   setTitle("OpenLifeOrganizer");

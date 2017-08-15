@@ -6,9 +6,11 @@
 #include <Wt/WHBoxLayout>
 #include <Wt/WApplication>
 
+#include "Controller.h"
+
 class View : public Wt::WApplication {
 public:
-  View(const Wt::WEnvironment& env);
+  View(const Wt::WEnvironment& env, Controller *pController);
 
 private:
   Wt::WHBoxLayout *CreateTopTab(Wt::WApplication *app, Wt::WContainerWidget *container);

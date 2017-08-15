@@ -1,7 +1,7 @@
 CXXFLAGS =	-O2 -g -Wall -fmessage-length=0 -DBOOST_SIGNALS_NO_DEPRECATION_WARNING -std=c++11 
 
 
-OBJS =		OpenLifeOrganizer.o View.o Model.o MdlOloDb.o XmlSupport.o
+OBJS =		OpenLifeOrganizer.o View.o Model.o MdlOloDb.o XmlSupport.o Controller.o
 
 LIBS = -lwthttp -lwt -lboost_signals -ltinyxml2 -lm
 
@@ -15,6 +15,9 @@ $(TARGET):	$(OBJS)
 
 View.o: View.cpp View.h
 	$(CXX) -c $(CXXFLAGS) View.cpp
+
+Controller.o: Controller.cpp Controller.h
+	$(CXX) -c $(CXXFLAGS) Controller.cpp
 
 Model.o: Model.cpp Model.h
 	$(CXX) -c $(CXXFLAGS) Model.cpp
