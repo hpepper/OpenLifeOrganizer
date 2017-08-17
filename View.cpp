@@ -73,8 +73,9 @@ View::View(const Wt::WEnvironment& env, Controller *pController)
 
 } // end
 
-void View::TestonUserClicked() {
-	log("info") << "TestonUserClicked";
+void View::TestonUserClicked(Wt::WLineEdit* pGoalLinel) {
+
+	log("info") << "TestonUserClicked(" << pGoalLinel->text() << ")";
 }
 
 
@@ -99,7 +100,9 @@ Wt::WContainerWidget* View::CreateCaptureTab(Wt::WApplication *app) {
 	//pAddButton->clicked().connect(m_pController, Controller::AddGoal());
 	//pAddButton->clicked().connect(this, Controller::AddGoal());
 	//pAddButton->clicked().connect(boost::bind(&Controller::AddGoal()));
-	pAddButton->clicked().connect(boost::bind(&View::TestonUserClicked, this));
+	//pAddButton->clicked().connect(boost::bind(&View::TestonUserClicked, this, "FIXED"));
+	pAddButton->clicked().connect(boost::bind(&View::TestonUserClicked, this, pGoalLine));
+
 	// TODO V Register the 'list of existing goals' widget with the controller, so that the controller can provide an updated list of entries.
 
 

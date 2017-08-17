@@ -18,7 +18,7 @@ private:
 
   Controller *m_pController;
 
-  void TestonUserClicked();
+  void TestonUserClicked(Wt::WLineEdit* pGoalLine);
   Wt::WContainerWidget* CreateCaptureTab(Wt::WApplication *app);
 };
 
