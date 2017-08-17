@@ -13,6 +13,7 @@
 #include <Wt/WTextArea>
 #include <Wt/WGridLayout>
 #include <Wt/WLength>
+#include <Wt/WPushButton>
 
 // https://www.webtoolkit.eu/wt/doc/reference/html/classWt_1_1WApplication.html#ae29a843f4d50159b17abfa9503c389db
 // wApp->log("notice") << "User " << userName << " logged in successfully.";
@@ -35,6 +36,8 @@ View::View(const Wt::WEnvironment& env, Controller *pController)
   setTitle("OpenLifeOrganizer");
   //useStyleSheet("everywidget.css");
   //useStyleSheet("example1.css");
+
+  m_pController = pController;
 
 
   log("info") << "Test";
@@ -70,6 +73,39 @@ View::View(const Wt::WEnvironment& env, Controller *pController)
 
 } // end
 
+void View::TestonUserClicked() {
+	log("info") << "TestonUserClicked";
+}
+
+
+// TODO Add a single line entry
+// TODO And add a 'Add' button.
+Wt::WContainerWidget* View::CreateCaptureTab(Wt::WApplication *app) {
+	Wt::WContainerWidget *pCaptureTab = new Wt::WContainerWidget();
+	pCaptureTab->addWidget(new Wt::WText("Goal: "));
+
+	Wt::WLineEdit* pGoalLine = new Wt::WLineEdit(pCaptureTab);
+	// TODO V make this sticky to the sides, so that is what determines the width.
+	pGoalLine->setTextSize(50);
+
+	// Arbitrary twitter with.
+	pGoalLine->setMaxLength(165);
+
+	Wt::WPushButton *pAddButton = new Wt::WPushButton("Add", pCaptureTab);
+
+	pAddButton->setDefault(true);
+
+	//TODO V When clicked, send the value to the controller and clear the text field.
+	//pAddButton->clicked().connect(m_pController, Controller::AddGoal());
+	//pAddButton->clicked().connect(this, Controller::AddGoal());
+	//pAddButton->clicked().connect(boost::bind(&Controller::AddGoal()));
+	pAddButton->clicked().connect(boost::bind(&View::TestonUserClicked, this));
+	// TODO V Register the 'list of existing goals' widget with the controller, so that the controller can provide an updated list of entries.
+
+
+	return(pCaptureTab);
+}
+
 
 /**
  * Create the Tab for the top part. It also create the container for each tab.
@@ -79,9 +115,13 @@ Wt::WHBoxLayout *View::CreateTopTab(Wt::WApplication *app, Wt::WContainerWidget 
   Wt::WHBoxLayout *hbox = new Wt::WHBoxLayout();
   container->setLayout(hbox);
 
+  // TODO This container needs to be deleted on destruction of this class.
+  Wt::WContainerWidget *pCaptureTab = CreateCaptureTab(app);
+
   // Things are getting added to the hbox.
+  // https://www.webtoolkit.eu/wt/doc/reference/html/classWt_1_1WTabWidget.html#a754d002238ce54b0006230dfb466f3b1
   Wt::WTabWidget *tabW = new Wt::WTabWidget(container);
-  tabW->addTab(new Wt::WTextArea("This is the contents of the first tab."),
+  tabW->addTab(pCaptureTab,
 	     "Capture", Wt::WTabWidget::PreLoading);
   tabW->addTab(new Wt::WTextArea("The contents of the tabs are pre-loaded in"
 			       " the browser to ensure swift switching."),
@@ -108,3 +148,4 @@ Wt::WHBoxLayout *View::CreateTopTab(Wt::WApplication *app, Wt::WContainerWidget 
   app->log("info") << "DDD CreateTopTab() done";
   return(hbox);
 } // end CreateTopTab
+

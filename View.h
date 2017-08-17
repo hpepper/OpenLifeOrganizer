@@ -12,8 +12,14 @@ class View : public Wt::WApplication {
 public:
   View(const Wt::WEnvironment& env, Controller *pController);
 
+
 private:
   Wt::WHBoxLayout *CreateTopTab(Wt::WApplication *app, Wt::WContainerWidget *container);
+
+  Controller *m_pController;
+
+  void TestonUserClicked();
+  Wt::WContainerWidget* CreateCaptureTab(Wt::WApplication *app);
 };
 
 #endif
