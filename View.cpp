@@ -73,15 +73,36 @@ View::View(const Wt::WEnvironment& env, Controller *pController)
 
 } // end
 
+
+/**
+ * Get the added goal added to the DB, via the Controller.
+ * And clear the text.
+ */
 void View::TestonUserClicked(Wt::WLineEdit* pGoalLinel) {
 
-	log("info") << "TestonUserClicked(" << pGoalLinel->text() << ")";
+	m_pController->AddCaptureGoal(pGoalLinel->text().toUTF8());
+
+	// Clear the text field, so it is ready for the next entry.
+	pGoalLinel->setText("");
+
+	// TODO V The List of Goals(unprocessed) must be updated with this latest goal.
+	/*
+	  Prefereably this update should be initialized by the Controller(
+	    so the controller, would get a list of the Goals, that are in the capture state/phase only.
+	      This means that if somewhere else any of the other goals had been processed(chunked etc) these goals would have disappered as well.
+	    the list would be provided to the view and the view will render/display the list(perhaps in alphabetical order).
+	 */
+
 }
 
 
-// TODO Add a single line entry
-// TODO And add a 'Add' button.
+/**
+ * Populates the 'Capture' Tab
+ *
+ * TODO V Should I put this CreateCaptureTab in its own Class?
+ */
 Wt::WContainerWidget* View::CreateCaptureTab(Wt::WApplication *app) {
+	// TODO V This pCaptureTab must be deleted upon destruction.
 	Wt::WContainerWidget *pCaptureTab = new Wt::WContainerWidget();
 	pCaptureTab->addWidget(new Wt::WText("Goal: "));
 
@@ -92,15 +113,14 @@ Wt::WContainerWidget* View::CreateCaptureTab(Wt::WApplication *app) {
 	// Arbitrary twitter with.
 	pGoalLine->setMaxLength(165);
 
+	// 'on enter' operation.
+	pGoalLine->enterPressed().connect(boost::bind(&View::TestonUserClicked, this, pGoalLine));
+
 	Wt::WPushButton *pAddButton = new Wt::WPushButton("Add", pCaptureTab);
 
 	pAddButton->setDefault(true);
 
-	//TODO V When clicked, send the value to the controller and clear the text field.
-	//pAddButton->clicked().connect(m_pController, Controller::AddGoal());
-	//pAddButton->clicked().connect(this, Controller::AddGoal());
-	//pAddButton->clicked().connect(boost::bind(&Controller::AddGoal()));
-	//pAddButton->clicked().connect(boost::bind(&View::TestonUserClicked, this, "FIXED"));
+	// When clicked, send the value to the controller and clear the text field.
 	pAddButton->clicked().connect(boost::bind(&View::TestonUserClicked, this, pGoalLine));
 
 	// TODO V Register the 'list of existing goals' widget with the controller, so that the controller can provide an updated list of entries.
@@ -118,7 +138,7 @@ Wt::WHBoxLayout *View::CreateTopTab(Wt::WApplication *app, Wt::WContainerWidget 
   Wt::WHBoxLayout *hbox = new Wt::WHBoxLayout();
   container->setLayout(hbox);
 
-  // TODO This container needs to be deleted on destruction of this class.
+  // TODO N This container needs to be deleted on destruction of this class.
   Wt::WContainerWidget *pCaptureTab = CreateCaptureTab(app);
 
   // Things are getting added to the hbox.

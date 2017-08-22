@@ -9,7 +9,7 @@
 #include <fstream>
 #include <iostream>
 
-#include "MdlOloDb.h"
+
 
 Model::Model(std::string sDataFileName) {
 	std::ifstream fTestInputFileExist(sDataFileName.c_str());
@@ -18,13 +18,21 @@ Model::Model(std::string sDataFileName) {
 		std::cerr << "!!! the file does not exist: " << sDataFileName
 				<< std::endl;
 		exit(-1);
+	} else {
+		// TODO N Later create a reader and writer class to handle the read and write to the .xml file and other storage media.
+		m_pModelOloDatabase = new MdlOloDb(sDataFileName);
 	}
-	// TODO Later create a reader and writer class to handle the read and write to the .xml file and other storage media.
-	MdlOloDb *pOloDb = new MdlOloDb(sDataFileName);
 
 }
 
 Model::~Model() {
 	// TODO Auto-generated destructor stub
+}
+
+int Model::AddCaptureGoal(std::string sGoal) {
+	int nStatus = 0;
+
+	nStatus = m_pModelOloDatabase->AddCaptureGoal(sGoal);
+	return(nStatus);
 }
 

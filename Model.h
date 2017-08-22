@@ -11,11 +11,18 @@
 
 #include <string>
 
+#include "MdlOloDb.h"
+
 
 class Model {
 public:
-	Model(std::string sDataFileName);
+	Model(std::string);
 	virtual ~Model();
+
+	int AddCaptureGoal(std::string);
+
+private:
+	MdlOloDb *m_pModelOloDatabase;
 };
 
 #endif /* MODEL_H_ */

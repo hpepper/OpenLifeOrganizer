@@ -27,8 +27,6 @@
 
 Wt::WApplication *createView(const Wt::WEnvironment& env)
 {
-	// TODO Create the model, either here or in the main part?
-	// TODO V Probably add the model link.
 	Model *pModel = new Model("test_olodb.xml");
 
 	Controller *pController = new Controller(pModel);

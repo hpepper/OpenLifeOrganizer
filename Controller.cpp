@@ -15,3 +15,9 @@ Controller::~Controller() {
 	// TODO Auto-generated destructor stub
 }
 
+int Controller::AddCaptureGoal(std::string sGoalLine) {
+	int nStatus = 0;
+
+	nStatus = m_pModel->AddCaptureGoal(sGoalLine);
+	return(nStatus);
+}

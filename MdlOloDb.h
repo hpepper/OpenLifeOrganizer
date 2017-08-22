@@ -21,6 +21,8 @@ public:
 	MdlOloDb(std::string sXmlFilename);
 	virtual ~MdlOloDb();
 
+	int AddCaptureGoal(std::string);
+
 private:
         tinyxml2::XMLDocument m_xmlDoc;
         tinyxml2::XMLElement* m_xmlRoot;

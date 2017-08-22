@@ -1,8 +1,11 @@
 <OpenLifeOrganinzer Version="0.1.0">
-  <Goal Subject="" State="">
-    <CreationTimeStamp></CreationTimeStamp>
-    <Tag></Tag> <!--  tag cloud. -->
-    <Sphere></Sphere> <!-- Work, health, Relationship, home, hobby, ...??? -->
-    <!--  History of what happened. -->
-  </Goal>
+    <Goal Subject="" State="">
+        <CreationTimeStamp/>
+        <Tag/>
+        <!--  tag cloud. -->
+        <Sphere/>
+        <!-- Work, health, Relationship, home, hobby, ...??? -->
+        <!--  History of what happened. -->
+    </Goal>
+    <Goal Headline="Alpha"/>
 </OpenLifeOrganinzer>
