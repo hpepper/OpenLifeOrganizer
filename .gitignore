@@ -1,4 +1,4 @@
 OpenLifeOrganizer
 *.o
-doxygen/html
-doxygen/latex
+wt/doxygen/html
+wt/doxygen/latex
